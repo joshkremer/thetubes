@@ -33,4 +33,7 @@ function search() {
 // Called automatically with the response of the YouTube API request.
 function onSearchResponse(response) {
     showResponse(response);
+
+console.log(response)
 }
+
