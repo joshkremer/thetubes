@@ -4,6 +4,16 @@ function showResponse(response) {
     document.getElementById('response').innerHTML += responseString;
 }
 
+
+
+
+function grabVideoId(response) {
+console.log(response.items[0].id.videoId);
+
+}
+
+
+
 // Called automatically when JavaScript client library is loaded.
 function onClientLoad() {
     gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
@@ -33,7 +43,8 @@ function search() {
 // Called automatically with the response of the YouTube API request.
 function onSearchResponse(response) {
     showResponse(response);
-
-console.log(response)
+    grabVideoId(response);
+		
+// console.log(response)
 }
 
