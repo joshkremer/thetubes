@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Simple Ajax Form</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script>
 			$(document).ready(function() {
 		    	$('form').submit(function(event) { //Trigger on form submit
