@@ -1,20 +1,57 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <script src="thetubes.js" type="text/javascript"></script>
-        <script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
-    </head>
-    <body>
-        <pre id="response"></pre>
-	<h1>test</h1>
+<html lang="en">
+	<head>
+		<title>Simple Ajax Form</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+		    	$('form').submit(function(event) { //Trigger on form submit
+		    		$('#name + .throw_error').empty(); //Clear the messages first
+		    		$('#success').empty();
+		    
+		    		var postForm = { //Fetch form data
+		    			'name' 	: $('input[name=name]').val() //Store name fields value
+		    		};
+		    
+		    		$.ajax({ //Process the form using $.ajax()
+		    			type 		: 'POST', //Method type
+		    			url 		: 'form_process.php', //Your form processing file url
+		    			data 		: postForm, //Forms name
+		    			dataType 	: 'json',
+		    			success 	: function(data) {
+		    				
+		    			if (!data.success) { //If fails
+		    				if (data.errors.name) { //Returned if any error from process.php
+		    					$('.throw_error').fadeIn(1000).html(data.errors.name); //Throw relevant error
+		   					}
+		   				} else {
+		    					$('#success').fadeIn(1000).append('<p>' + data.posted + '</p>'); //If successful, than throw a success message
+		    				}
+		    			}
+		    		});
+		    	    event.preventDefault(); //Prevent the default submit
+		    	});
+		    });
+		</script>
 
-<?php 
+  <link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
 
-echo '<div style="position:relative;height:0;padding-bottom:75.0%"><iframe src="https://www.youtube.com/embed/kY5P9sZqFas?ecver=2" width="480" height="360" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>'
-?>
-    </body>
-
-
+<h1>Youtube Downloadr</h1>
+<?php echo $name; ?>
+<?php echo "asdf"; ?>
+ 
+		<form method="post" name="postForm">
+			<ul>
+				<li>
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" />
+					<span class="throw_error"></span>
+				</li>
+			</ul>
+			<input type="submit" value="Send" />
+		</form>
+		<div id="success"></div>
+	</body>
 </html>
-		
-
